@@ -1,0 +1,297 @@
+---
+title: "Daniel Vartanian's Résumé"
+author: Daniel Vartanian
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: false
+output:
+  pagedown::html_resume:
+    css: ["resume", "css/dd_cv.css", "css/custom.css"]
+    self_contained: true
+---
+
+<!-- See <https://pagedown.rbind.io/#resume> to learn more. -->
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results = "asis",
+  echo = FALSE
+)
+```
+
+```{r, eval=FALSE, include=FALSE}
+library(beepr)
+library(checkmate)
+library(datadrivencv)
+library(dplyr)
+library(glue)
+library(googlesheets4)
+library(here)
+library(metathis)
+library(pagedown)
+library(purrr)
+library(rmarkdown)
+library(tidyr)
+```
+
+```{r, include=FALSE}
+source(here::here("R", "printing.R"))
+```
+
+```{r metathis, echo = FALSE, message = FALSE, warning = FALSE}
+metathis::meta() |>
+  metathis::meta_name("github-repo" = "danielvartan/resume-en") |>
+  metathis::meta_social(
+    title = "Daniel Vartanian's Résumé",
+    description = paste(
+      "Developed using the R packages {RMarkdown}, {pagedown} and {datadrivencv}."
+    ),
+    url = "https://danielvartan.github.io/resume-en",
+    og_type = "website",
+    og_author = "Daniel Vartanian",
+    og_locale = "pt_BR"
+  )
+```
+
+<!-- styles: start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<!-- styles: end -->
+
+<!-- scripts: start -->
+<script src="https://kit.fontawesome.com/ddcb976bc4.js" crossorigin="anonymous"></script>
+<!-- scripts: end -->
+
+```{r, include = FALSE}
+data_location <- paste0(
+  "https://docs.google.com/spreadsheets/d/",
+  "1enL3ugVvMhzSq2BaYApeuXmpOh0eZUMsMv0yD3YU1_A"
+)
+
+# Read all data and initialize a cv printer object
+cv <- data_location  |> create_cv_object()
+```
+
+# Aside
+
+![Daniel Vartanian](https://avatars.githubusercontent.com/u/29462472?v=4){width=100% style='border-radius: 50%; text-align: center;'}
+
+```{r}
+if (isTRUE(params$pdf_mode)) {
+  cat(
+    "<p style='font-size: 0.7rem; text-align: center;'>",
+    "View this résumé online at: ",
+    "[danielvartan.github.io/resume-en]",
+    "(https://danielvartan.github.io/resume-en)",
+    "</p>",
+    sep = ""
+  )
+} else {
+  cat(
+    "<p style='text-align: center;'>",
+    "[<i class = 'fas fa-download'></i> Download this résumé]",
+    "(pdf/Daniel%20Vartanian.pdf)",
+    "</p>",
+    sep = ""
+  )
+}
+```
+
+::: {style="text-align: left; padding-top:10px;"}
+<p style="font-size: 0.7rem;">For more information, please refer to my résumé on [LinkedIn](https://www.linkedin.com/in/danielvartan).</p>
+:::
+
+::: {style="text-align: left; padding-top:20px;"}
+<h2>Contact</h2>
+
+<i class="fa fa-map-marker"></i>  São Paulo, SP, Brazil
+
+<i class="fa-solid fa-phone"></i> [+55 11 95057-9817](https://wa.me/+5511950579817)
+
+<i class="fa-solid fa-envelope"></i> [danvartan@gmail.com](mailto:danvartan@gmail.com)
+
+<i class="fa-brands fa-github"></i> [danielvartan](https://github.com/danielvartan)
+
+<i class="fa-brands fa-linkedin-in"></i> [danielvartan](https://www.linkedin.com/in/danielvartan)
+
+<i class="fa-brands fa-orcid"></i> [0000-0001-7782-759X](https://orcid.org/0000-0001-7782-759X)
+:::
+
+::: {style="text-align: left; padding-top:20px;"}
+<h2>Programming Languages</h2>
+
+<i class="fab fa-r-project"></i> `R` (Primary)
+
+<i class="fab fa-python"></i> `Python`
+
+<i class="fas fa-database"></i> `SQL`
+
+<i class="fab fa-js"></i> `JavaScript`
+
+<i class="fab fa-html5"></i> `HTML`
+
+<i class="fab fa-css3-alt"></i> `CSS`
+
+<i class="fas fa-code-branch"></i> `Git`
+:::
+
+## Disclaimer {#disclaimer}
+
+Developed with R [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](https://github.com/nstrayer/datadrivencv) packages.
+
+The code is available on [**GitHub**](https://github.com/danielvartan/resume-en).
+
+Updated on `r format(Sys.Date(), "%B %d, %Y")`.
+
+
+# Main
+
+## Daniel Vartanian {#title}
+
+<p style="font-size: 1rem;">Complexity Scientist and Data Scientist<p>
+
+## Experience {#experience data-icon=suitcase}
+
+```{r}
+cv <- cv |> print_section("experience")
+```
+
+## Education {#education data-icon=graduation-cap data-concise=true}
+
+```{r}
+cv <- cv |> print_section("education")
+```
+
+## Affiliations {#affiliations data-icon=id-badge}
+
+```{r}
+cv <- cv |> print_section("memberships")
+```
+
+::: {.aside style="top: 10px;"}
+<h2>Languages</h2>
+
+<h3>English</h3>
+
+<i class="fa-solid fa-ear-listen"></i> Fluent
+
+<i class="fas fa-book-reader"></i> Fluent
+
+<i class="fa fa-comments-o" aria-hidden="true"></i> Fluent
+
+<i class="fas fa-pencil-alt" aria-hidden="true"></i> Fluent
+
+<h3>Portuguese</h3>
+
+<i class="fa-solid fa-ear-listen"></i> Fluent
+
+<i class="fas fa-book-reader"></i> Fluent
+
+<i class="fa fa-comments-o" aria-hidden="true"></i> Fluent
+
+<i class="fas fa-pencil-alt" aria-hidden="true"></i> Fluent
+
+<h3>Spanish</h3>
+
+<i class="fa-solid fa-ear-listen"></i> Fluent
+
+<i class="fas fa-book-reader"></i> Fluent
+
+<i class="fa fa-comments-o" aria-hidden="true"></i> Intermediate
+
+<i class="fas fa-pencil-alt" aria-hidden="true"></i> Intermediate
+
+<br>
+
+<h2>Skills</h2>
+
+<p style="margin-block-start: 0em;">• Statistical modeling</p>
+
+<p style="margin-block-start: 0em;">• Machine learning</p>
+
+<p style="margin-block-start: 0em;">• Complex systems modeling</p>
+
+<p style="margin-block-start: 0em;">• Agent-based modeling</p>
+
+<p style="margin-block-start: 0em;">• Dynamic systems modeling</p>
+
+<p style="margin-block-start: 0em;">• Complex network modeling</p>
+
+<p style="margin-block-start: 0em;">• Temporal data analysis</p>
+
+<p style="margin-block-start: 0em;">• Spatial data analysis</p>
+
+<p style="margin-block-start: 0em;">• Software development</p>
+
+<p style="margin-block-start: 0em;">• Data engineering</p>
+
+<p style="margin-block-start: 0em;">• Data visualization</p>
+
+<p style="margin-block-start: 0em;">• Dashboards (with R [Shiny](https://shiny.posit.co/))</p>
+
+<p style="margin-block-start: 0em;">• Technical and academic writing</p>
+
+<p style="margin-block-start: 0em;">• Graphic design</p>
+:::
+
+\pagebreak
+
+## Projects {#projects data-icon=box-open}
+
+```{r}
+cv <- cv |> print_section("software_development")
+```
+
+## Main Academic Publications {#publications data-icon=book}
+
+```{r}
+cv <- cv |> print_section("academic_articles")
+```
+
+::: {.aside style="top: 10px;"}
+<h2>Organizations</h2>
+
+<h3>[An Introduction to the R Programming Language](https://danielvartan.github.io/r-course)</h3>
+
+<p>School of Public Health at the University of São Paulo (2025)</p>
+
+<h3>[Agent-Based Modeling Study Group](https://trello.com/b/mzqEtRdm/agent-based-modeling-study-group)</h3>
+
+<p>University of São Paulo (2024)</p>
+
+<h3>[Introductory Course on Actigraphy](https://web.archive.org/web/20211026202625/https://www.sono2021.com.br/evento/sono2021/programacao/gradeatividades)</h3>
+
+<p>XVIII Brazilian Sleep Congress (2021)</p>
+
+<h3>[Sleep at EACH](https://photos.app.goo.gl/spUsAgPNhdnEXQja8)</h3>
+
+<p>Wellness project focused on creating sleep spaces for students, developed at the School of Arts, Sciences, and Humanities, University of São Paulo (2017).</p>
+
+<br>
+
+<h2>Courses</h2>
+
+<h3>[Introduction to Agent-Based Modeling](https://abm.complexityexplorer.org/)</h3>
+
+<p>Santa Fe Institute (2024, Complexity Explorer)</p>
+
+<h3>[São Paulo School of Advanced Science on Ecology of Human Sleep and Biological Rhythms](https://espca.fapesp.br/escola/sao_paulo_school_of_advanced_science_on_ecology_of_human_sleep_and_biological_rhythms/101/)</h3>
+
+<p>University of São Paulo (2022)</p>
+
+<h3>[Circadian Clocks: How Rhythms Structure Life](https://www.coursera.org/learn/circadian-clocks)</h3>
+
+<p>Ludwig-Maximilians-Universität München (2022, Coursera)</p>
+
+<h3>[R Programming](https://www.coursera.org/learn/r-programming)</h3>
+
+<p>Johns Hopkins University (2020, Coursera)</p>
+
+<h3>[Access and Use of Technical-Scientific Information](https://uspdigital.usp.br/apolo/apoObterCurso?cod_curso=860400060&cod_edicao=12001&id_periodo=&id_modalidade=4)</h3>
+
+<p>University of São Paulo (2013)</p>
+
+<h3>Art and Technique of Academic Writing</h3>
+
+<p>University of São Paulo (2013)</p>
+:::
